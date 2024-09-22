@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}Add/Edit Movie{% endblock %}
+
+{% block content %}
+    <h2>{% if object %}Edit Movie{% else %}Add New Movie{% endif %}</h2>
+    <form method="post" enctype="multipart/form-data" class="needs-validation" novalidate>
+        {% csrf_token %}
+        {{ form.non_field_errors }}
+        {{ form|crispy }}  <!-- Рендеринг форми через crispy -->
+
+        <button type="submit" class="btn btn-primary">
+            {% if object %}Update Movie{% else %}Add Movie{% endif %}
+        </button>
+    </form>
+{% endblock %}

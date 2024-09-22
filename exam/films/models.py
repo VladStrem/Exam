@@ -16,7 +16,8 @@ class Movie(models.Model):
     duration = models.DurationField()
     genre = models.ForeignKey(Genre, on_delete=models.CASCADE, related_name='movies')
     budget = models.DecimalField(max_digits=10, decimal_places=2)
-    poster = models.ImageField(upload_to='posters/', blank=True, null=True)
+    poster = models.ImageField(upload_to='films/images',
+                               default="default.png", blank=True, null=True)
 
     def __str__(self):
         return self.title

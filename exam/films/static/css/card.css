@@ -1,0 +1,44 @@
+/* exam/films/static/css/styles.css */
+.card {
+    border: none;
+    transition: all 0.3s ease-in-out;
+}
+
+.card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+}
+
+.card-img-top {
+    overflow: hidden;
+    height: 250px;
+    object-fit: cover;
+}
+
+.meta ul {
+    padding-left: 0;
+    margin-top: 10px;
+}
+
+.meta ul li {
+    display: inline-block;
+    margin-right: 15px;
+    color: #6c757d;
+    font-size: 0.9em;
+}
+
+.meta ul li i {
+    margin-right: 5px;
+    color: #6c757d;
+}
+
+.btn-outline-dark {
+    border-color: #6c757d;
+    color: #6c757d;
+    transition: background-color 0.3s ease;
+}
+
+.btn-outline-dark:hover {
+    background-color: #6c757d;
+    color: #fff;
+}

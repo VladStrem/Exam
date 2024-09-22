@@ -1,0 +1,29 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css" integrity="sha256-2XFplPlrFClt0bIdPgpz8H7ojnk10H69xRqd9+uTShA=" crossorigin="anonymous" />
+
+<div class="container">
+    <div class="row mt-4">
+        {% for movie in movies %}
+        <div class="col-md-6 col-lg-4 mt-5 wow fadeInUp" data-wow-delay=".2s"
+             style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInUp;">
+            <div class="card bg-light shadow-lg">
+                <div class="card-img-top position-relative">
+                    <img alt="{{ movie.title }}" src="{{ movie.poster.url }}" class="img-fluid" height="250px">
+                </div>
+                <div class="card-body p-4">
+                    <h3 class="h5 card-title"><a href="{% url 'films:movies-detail' movie.pk %}" class="text-dark">{{ movie.title }}</a></h3>
+                    <h5 class="h6 mb-3 text-muted">Director: {{ movie.director }}</h5>
+                    <p class="card-text">{{ movie.description|truncatewords:15 }}</p>
+                    <div class="meta meta-style2">
+                        <ul class="list-unstyled">
+                            <li><i class="fas fa-calendar-alt"></i> {{ movie.release_date|date:"d M Y" }}</li>
+                            <li><i class="fas fa-clock"></i> Duration: {{ movie.duration }}</li>
+                            <li><i class="fas fa-dollar-sign"></i> Budget: ${{ movie.budget }}</li>
+                        </ul>
+                    </div>
+                    <a href="{% url 'films:movies-detail' movie.pk %}" class="btn btn-outline-dark mt-3">More Details</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>

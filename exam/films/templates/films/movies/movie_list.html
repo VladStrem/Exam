@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title %}Movies{% endblock %}
+
+{% block content %}
+
+<form method="get" action="{% url 'films:movies-list' %}">
+    <input type="text" name="q" placeholder="Search movies...">
+    <button type="submit">Search</button>
+</form>
+
+<h1>Movies</h1>
+<ul>
+    {% for movie in object_list %}
+        <li>
+            <a href="{% url 'films:movies-detail' movie.pk %}">{{ movie.title }}</a>
+            - {{ movie.director }}
+        </li>
+    {% endfor %}
+</ul>
+{% endblock %}
