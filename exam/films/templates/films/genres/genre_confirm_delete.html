@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title %} Delete Genre {% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <h2 class="text-center">Delete Genre</h2>
+    <p class="text-center">Are you sure you want to delete the genre <strong>{{ object.name }}</strong>?</p>
+
+    <div class="text-center">
+        <form method="post">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger">Yes, delete</button>
+            <a href="{{ success_url }}" class="btn btn-secondary">Cancel</a>
+        </form>
+    </div>
+</div>
+{% endblock %}

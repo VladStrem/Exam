@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1> DashBoard </h1>
+
+<p> Welcome to your dashboard, <strong>{{ request.user.username }}</strong></p>
+
+<p>
+    Username: {{ request.user.username }} <br>
+    Name: {{ request.user.first_name }} <br>
+    Date Joined: {{ request.user.date_joined }} <br>
+    Email: {{ request.user.email }}<br>
+    Last Login: {{ request.user.last_login }}<br>
+</p>
+
+{% if request.user.profile.photo %}
+<div class="blog-grid-img position-relative">
+    <img alt="img" src="{{ request.user.profile.photo.url }}" height="200px">
+</div>
+{% endif %}
+
+{% if request.user.is_authenticated %}
+<p>You can <a href="{% url 'accounts:profile-edit' %}">Edit your profile</a></p>
+<form style="display:inline-block " method="post" action="{% url 'accounts:logout' %}">
+    {% csrf_token %}
+    <input type="submit" class="nav-link btn btn-primary" value="Logout"/>
+</form>
+{% else %}
+<p><a href="{% url 'accounts:login' %}">Log-In</a></p>
+{% endif %}
+
+{% endblock %}

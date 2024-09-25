@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block content %}
+  <div class="container">
+    <h1>genres</h1>
+    <a href="{% url 'films:genre-create' %}" class="btn btn-primary mb-3">Add New genre</a>
+    <ul class="list-group">
+      {% for genre in genres %}
+        <li class="list-group-item">
+
+            {{ genre.name }}
+
+          <a href="{% url 'films:genre-update' genre.pk %}" class="btn btn-warning btn-sm float-right ml-2">Edit</a>
+          <a href="{% url 'films:genre-delete' genre.pk %}" class="btn btn-danger btn-sm float-right">Delete</a>
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
+{% endblock %}

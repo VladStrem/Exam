@@ -9,5 +9,12 @@ urlpatterns = [
     path('create/', views.MovieCreateView.as_view(), name='movies-create'),
     path('<int:pk>/update/', views.MovieUpdateView.as_view(), name='movies-update'),
     path('<int:pk>/delete/', views.MovieDeleteView.as_view(), name='movies-delete'),
-    path('cards/', views.movie_cards, name='movies-cards')
+
+    path('cards/', views.movie_cards, name='movies-cards'),
+
+    path('genres/', views.GenreListView.as_view(), name='genre-list'),
+    path('genres/create/', views.GenreCreateView.as_view(), name='genre-create'),
+    path('genres/<int:pk>/edit/', views.GenreUpdateView.as_view(), name='genre-update'),
+    path('genres/<int:pk>/delete/', views.GenreDeleteView.as_view(), name='genre-delete'),
+
 ]

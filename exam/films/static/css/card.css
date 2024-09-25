@@ -2,17 +2,52 @@
 .card {
     border: none;
     transition: all 0.3s ease-in-out;
+    width: 100%;
+    max-width: 500px; /* Збільшено ширину картки */
+    height: 100%;
+    background-color: #f8f9fa; /* Фон картки */
 }
 
 .card:hover {
     transform: translateY(-10px);
     box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
 }
+.card-aside {
+    border: none;
+    transition: all 0.3s ease-in-out;
+    width: 100%;
+    height: auto;
+    background-color: #f8f9fa; /* Фон картки */
+}
+
+.card-aside:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+}
 
 .card-img-top {
     overflow: hidden;
-    height: 250px;
-    object-fit: cover;
+    height: 250px; /* Тепер висота зображення менша, близько половини картки */
+    object-fit: cover; /* Адаптація зображення по висоті і ширині */
+    width: 100%; /* Зображення займає всю ширину картки */
+}
+
+.card-body {
+    padding: 20px;
+    height: calc(100% - 150px); /* Забезпечення, щоб текст займав залишкову частину картки */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.card-title a {
+    color: #343a40;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.card-title a:hover {
+    color: #6c757d; /* Трохи змінюється колір при наведенні */
 }
 
 .meta ul {

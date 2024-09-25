@@ -3,30 +3,51 @@
 {% block title %}{{ movie.title }} - Details{% endblock %}
 
 {% block content %}
-    <div class="row">
-        <div class="col-md-8">
-            <h1>{{ movie.title }}</h1>
-            <p><strong>Director:</strong> {{ movie.director }}</p>
-            <p><strong>Release Date:</strong> {{ movie.release_date }}</p>
-            <p><strong>Duration:</strong> {{ movie.duration }}</p>
-            <p><strong>Genre:</strong> {{ movie.genre.name }}</p>
-            <p><strong>Budget:</strong> ${{ movie.budget }}</p>
-            <p><strong>Description:</strong> {{ movie.description }}</p>
-            
-            {% if movie.poster %}
-                <img src="{{ movie.poster.url }}" alt="Poster for {{ movie.title }}" class="img-fluid mt-3">
-            {% else %}
-                <img src="media/default.png" alt="No poster available" class="img-fluid mt-3">
-            {% endif %}
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="card shadow-sm">
+                    <div class="card-header bg-primary text-white">
+                        <h1 class="card-title">{{ movie.title }}</h1>
+                    </div>
+                    <div class="card-body">
+                        <p><strong>Director:</strong> {{ movie.director }}</p>
+                        <p><strong>Release Date:</strong> {{ movie.release_date }}</p>
+                        <p><strong>Duration:</strong> {{ movie.duration }} minutes</p>
+                        <p><strong>Genre:</strong> {{ movie.genre.name }}</p>
+                        <p><strong>Budget:</strong> ${{ movie.budget|floatformat:2 }} million</p>
+                        <p><strong>Description:</strong> {{ movie.description }}</p>
 
-            <div class="mt-3">
-                <a href="{% url 'films:movies-update' movie.pk %}" class="btn btn-warning">Edit</a>
-                <a href="{% url 'films:movies-delete' movie.pk %}" class="btn btn-danger">Delete</a>
-                <a href="{% url 'films:movies-list' %}" class="btn btn-secondary">Back to List</a>
+                        {% if movie.poster %}
+                            <img src="{{ movie.poster.url }}" alt="Poster for {{ movie.title }}" class="img-fluid mt-3 rounded">
+                        {% else %}
+                            <img src="/media/default.png" alt="No poster available" class="img-fluid mt-3 rounded">
+                        {% endif %}
+                    </div>
+                    <div class="card-footer text-right">
+                        <a href="{% url 'films:movies-update' movie.pk %}" class="btn btn-warning btn-sm">Edit</a>
+                        <a href="{% url 'films:movies-delete' movie.pk %}" class="btn btn-danger btn-sm">Delete</a>
+                        <a href="{% url 'films:movies-list' %}" class="btn btn-secondary btn-sm">Back to List</a>
+                    </div>
+                </div>
             </div>
-        </div>
-        <div class="col-md-4">
-
+            <div class="col-md-4">
+                <div class="card shadow-sm">
+                    <div class="card-header bg-secondary text-white">
+                        <h4>Movie Information</h4>
+                    </div>
+                    <div class="card-body">
+                        <ul class="list-group">
+                            <li class="list-group-item"><strong>Title:</strong> {{ movie.title }}</li>
+                            <li class="list-group-item"><strong>Director:</strong> {{ movie.director }}</li>
+                            <li class="list-group-item"><strong>Release:</strong> {{ movie.release_date }}</li>
+                            <li class="list-group-item"><strong>Duration:</strong> {{ movie.duration }} minutes</li>
+                            <li class="list-group-item"><strong>Genre:</strong> {{ movie.genre.name }}</li>
+                            <li class="list-group-item"><strong>Budget:</strong> ${{ movie.budget|floatformat:2 }} million</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 {% endblock %}

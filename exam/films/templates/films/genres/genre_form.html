@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% block title %} Add Genre {% endblock %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="container py-5">
+    <h2 class="mb-4 text-center">{% if form.instance.pk %}Edit Category{% else %}Create New Category{% endif %}</h2>
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <form method="post" class="needs-validation" novalidate>
+                {% csrf_token %}
+                {{ form|crispy }} <!-- Замість виведення окремо form.name -->
+                <div class="text-center mt-3">
+                    <button class="btn btn-success btn-lg" type="submit">Add Genre</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="my-5 p-3 bg-light rounded shadow-sm">
+        <h3 class="mb-4">Existing Genres</h3>
+        <table class="table table-hover">
+            <thead class="thead-light">
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Genre Name</th>
+                    <th scope="col">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for genre in genres %}
+                <tr>
+                    <th scope="row">{{ forloop.counter }}</th>
+                    <td>
+                        <a href="#" class="text-decoration-none text-dark">{{ genre.name }}</a>
+                    </td>
+                    <td>
+                        <a href="{% url 'films:genre-update' pk=genre.pk %}" class="btn btn-warning btn-sm me-2">Edit</a>
+                        <a href="{% url 'films:genre-delete' pk=genre.pk %}" class="btn btn-danger btn-sm">Delete</a>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="3" class="text-center text-muted">No genres available.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}
