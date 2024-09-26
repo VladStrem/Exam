@@ -4,14 +4,28 @@
 {% block title %}Add/Edit Movie{% endblock %}
 
 {% block content %}
-    <h2>{% if object %}Edit Movie{% else %}Add New Movie{% endif %}</h2>
-    <form method="post" enctype="multipart/form-data" class="needs-validation" novalidate>
-        {% csrf_token %}
-        {{ form.non_field_errors }}
-        {{ form|crispy }}  <!-- Рендеринг форми через crispy -->
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-sm">
+                <div class="card-header bg-primary text-white">
+                    <h2 class="mb-0">{% if object %}Edit Movie{% else %}Add New Movie{% endif %}</h2>
+                </div>
+                <div class="card-body">
+                    <form method="post" enctype="multipart/form-data" class="needs-validation" novalidate>
+                        {% csrf_token %}
+                        {{ form.non_field_errors }}
+                        {{ form|crispy }}
 
-        <button type="submit" class="btn btn-primary">
-            {% if object %}Update Movie{% else %}Add Movie{% endif %}
-        </button>
-    </form>
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-primary">
+                                {% if object %}Update Movie{% else %}Add Movie{% endif %}
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}
