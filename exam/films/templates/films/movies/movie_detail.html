@@ -18,6 +18,8 @@
                         <p><strong>Budget:</strong> ${{ movie.budget|floatformat:2 }} million</p>
                         <p><strong>Description:</strong> {{ movie.description }}</p>
 
+                        <p><strong>Created by:</strong> {{ movie.user.username }}</p> <!-- Додаємо користувача -->
+
                         {% if movie.poster %}
                             <img src="{{ movie.poster.url }}" alt="Poster for {{ movie.title }}" class="img-fluid mt-3 rounded">
                         {% else %}
@@ -44,6 +46,7 @@
                             <li class="list-group-item"><strong>Duration:</strong> {{ movie.duration }} minutes</li>
                             <li class="list-group-item"><strong>Genre:</strong> {{ movie.genre.name }}</li>
                             <li class="list-group-item"><strong>Budget:</strong> ${{ movie.budget|floatformat:2 }} million</li>
+                            <li class="list-group-item"><strong>Created by:</strong> {{ movie.user.username }}</li> <!-- Тут також -->
                         </ul>
                     </div>
                 </div>

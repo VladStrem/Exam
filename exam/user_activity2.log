@@ -1,0 +1,8 @@
+Watching for file changes with StatReloader
+"GET /accounts/profile/ HTTP/1.1" 200 18221
+"POST /accounts/logout/ HTTP/1.1" 200 16651
+"GET /accounts/login/ HTTP/1.1" 200 17254
+"POST /accounts/login/ HTTP/1.1" 302 0
+"GET /accounts/profile/ HTTP/1.1" 200 18221
+"GET /accounts/profile/ HTTP/1.1" 200 18221
+C:\Users\Vlad\PycharmProjects\pythonProjectFilms\exam\exam\settings.py changed, reloading.

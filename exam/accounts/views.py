@@ -1,17 +1,17 @@
 from django.contrib import messages
-from django.contrib.auth import authenticate, login, logout, update_session_auth_hash
+from django.contrib.auth import authenticate, login, logout, update_session_auth_hash, user_logged_in
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import LoginView, PasswordChangeView
 from django.contrib.auth.models import User
 from django.contrib.messages.views import SuccessMessageMixin
+from django.dispatch import receiver
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.views.generic import CreateView, UpdateView
 from django.urls import reverse_lazy
 from .forms import UserRegistrationForm, UserEditForm, ProfileEditForm
-
 
 from .forms import LoginForm
 # Журналізація виходу користувача:
@@ -20,6 +20,17 @@ import logging
 from .models import Profile
 
 logger = logging.getLogger(__name__)
+user_activity_logger = logging.getLogger('user_activity')
+
+
+logger.info("Test log message - checking if logging works")
+
+
+@receiver(user_logged_in)
+def log_user_login(sender, request, user, **kwargs):
+    print(f"User {user.username} logged in.")
+
+    user_activity_logger.info(f"User {user.username} logged in.")
 
 
 # Create your views here.
@@ -44,11 +55,11 @@ class CustomPasswordChangeView(PasswordChangeView):
 
 @login_required
 def dashboard(request):
-    logger.debug('This is a debug message')
-    logger.info('This is an info message')
-    logger.warning('This is a warning message')
-    logger.error('This is an error message')
-    logger.critical('This is a critical message')
+    # logger.debug('This is a debug message')
+    # logger.info('This is an info message')
+    # logger.warning('This is a warning message')
+    # logger.error('This is an error message')
+    # logger.critical('This is a critical message')
     return render(request,
                   'accounts/dashboard.html')
 
@@ -78,6 +89,12 @@ class LoginUser(LoginView):
     template_name = "accounts/login.html"
     # edirect_authenticated_user = 'account:dashboard'
     extra_context = {"title": "Login USER"}
+
+    # def form_valid(self, form):
+    #     logger.info(f"User {self.request.user.username} logged in.")
+    #     update_session_auth_hash(self.request, form.user)
+    #     messages.success(self.request, "Login done")
+    #     return super().form_valid(form)
 
     # def get_success_url(self):
     #     return reverse_lazy('account:dashboard')

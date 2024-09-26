@@ -5,7 +5,7 @@
 {% block content %}
 <h1>List of Movies</h1>
 
-<form method="get" action="{% url 'films:movies-list' %}" class="mb-4">
+<form method="get" action="{% url 'films:movies-search' %}" class="mb-4">
     <div class="input-group">
         <input type="text" name="q" value="{{ request.GET.q }}" class="form-control" placeholder="Search movies...">
         <button type="submit" class="btn btn-primary">Search</button>

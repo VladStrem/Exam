@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'films',
+    'debug_toolbar',
     'crispy_forms',
     'crispy_bootstrap5',
 ]
@@ -51,6 +52,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
 ]
 
 ROOT_URLCONF = 'exam.urls'
@@ -127,6 +129,67 @@ STATICFILES_DIRS = [BASE_DIR / "static"]
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        # Обробник для користувацьких подій
+        'user_activity_file': {
+            'level': 'INFO',
+            'class': 'logging.FileHandler',
+            'filename': os.path.join(BASE_DIR, 'user_activity.log'),  # Лог-файл для користувачів
+        },
+    },
+    'loggers': {
+        # Логер для користувацьких подій
+        'user_activity': {
+            'handlers': ['user_activity_file'],
+            'level': 'INFO',
+            'propagate': False,
+        },
+    },
+}
+
+
+# LOGGING = {
+#     'version': 1,
+#     'disable_existing_loggers': False,
+#     'handlers': {
+#         'file': {
+#             'level': 'INFO',
+#             'class': 'logging.FileHandler',
+#             'filename': os.path.join(BASE_DIR, 'user_activity.log'),
+#         },
+#         'console': {
+#             'level': 'INFO',
+#             'class': 'logging.StreamHandler',
+#         },
+#     },
+#     'loggers': {
+#         'django': {
+#             'handlers': ['file', 'console'],  # Виводить і в файл, і в консоль
+#             'level': 'INFO',
+#             'propagate': True,
+#         },
+#         'accounts.views': {
+#             'handlers': ['file', 'console'],
+#             'level': 'INFO',
+#             'propagate': True,
+#         },
+#     },
+# }
+
+
+LOGIN_URL = "accounts:login"
+
+INTERNAL_IPS = [
+    '127.0.0.1',
+]
 
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 CRISPY_TEMPLATE_PACK = 'bootstrap5'
+
+AUTHENTICATION_BACKENDS = [
+    'accounts.authentication.EmailAuthBackend',
+    'django.contrib.auth.backends.ModelBackend',
+]
